@@ -1,0 +1,44 @@
+<div class="container mt-5">
+    <h1 class="text-center">{{this.currentPokemonList?.name | uppercase}} Info</h1>
+<div >
+    <mat-stepper orientation="vertical">
+        <mat-step>
+            <ng-template matStepLabel>Stat</ng-template>
+            <ng-template matStepContent>
+                <div class="mt-2">
+                    <mat-chip-list>
+                        <ng-container *ngFor="let stat of currentPokemonList?.stats">
+                            <mat-chip>{{stat.base_stat}}/{{stat.stat.name}}</mat-chip>
+                        </ng-container>
+                    </mat-chip-list>
+                </div>
+            </ng-template>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Abilities</ng-template>
+            <ng-template matStepContent>
+                <div class="mt-2">
+                    <mat-chip-list>
+                        <ng-container *ngFor="let abilities of currentPokemonList?.abilities">
+                            <mat-chip>{{abilities.slot}}/{{abilities.ability.name}}</mat-chip>
+                        </ng-container>
+                    </mat-chip-list>
+                </div>
+            </ng-template>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Types</ng-template>
+            <div class="mt-2">
+                <mat-chip-list>
+                    <ng-container *ngFor="let types of currentPokemonList?.types">
+                        <mat-chip>{{types.slot}}/{{types.type.name}}</mat-chip>
+                    </ng-container>
+                </mat-chip-list>
+            </div>
+        </mat-step>
+    </mat-stepper>
+    <div class="text-end mt-4">
+        <button mat-raised-button mat-button color="primary"[routerLink]="'/pokemon-list'">Back</button>
+    </div>
+</div>
+</div>

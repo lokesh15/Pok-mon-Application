@@ -1,0 +1,37 @@
+<div class="container ">
+  <div class="row mt-5 mb-3">
+    <div class="col-md-4">
+      <div class="input-group ">
+        <input type="text" class="form-control" placeholder="Filter" aria-label="Username"
+          aria-describedby="basic-addon1" #filter (keyup)="applyFilter($event)">
+      </div>
+    </div>
+    <div class="col offset-md-4 text-end">
+      <button mat-mini-fab color="primary" (click)="refresh()"><mat-icon class="col-white">refresh</mat-icon></button>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <div >
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+      </div>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell class="pr-0" *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+        <mat-icon class="col-white mr-5" (click)="currentPokemonDetails(row)">info</mat-icon>
+        <button style="margin-left: 40px;" mat-stroked-button  (click)="showDetails(row)">Get Details
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [style.cursor]="'pointer'" matRipple>
+    </mat-row>
+  </mat-table>
+  <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>
